@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Prueba enum</title>
+    </h:head>
+    <h:body>
+        <b:modal id="dlgFechas" styleClass="modalFrmFechas" closable="true" >
+            <h:form prependId="false" id="frModFechas">
+                <b:panel id="pnAddFechas" title="Agregar Fechas de actualización" look="info" collapsible="false" >
+                    <b:row>
+                        <b:column span="12">
+                            <b:selectOneMenu required="true" label="" id="cmbTipoFechas" value="#{mbFecha.fecha.tipoFecha}" >
+                                <f:selectItem itemLabel="Seleccione el tipo de fecha a ingresar" itemValue="" noSelectionOption="true" />  
+                                <f:selectItems  value="#{mbFecha.tiposFechas}"/>
+                            </b:selectOneMenu>
+                        </b:column>
+                    </b:row>
+                    <b:row>
+                        <b:column span="4">
+                            <p:inputText style="font-size: 12px;font-weight: lighter" placeholder="aaaa-mm-dd" label="Fecha: " id="dtpFecha" 
+                                         value="#{mbFecha.fecha.fecha}">
+                                <f:convertDateTime pattern="yyyy-MM-dd" />
+                            </p:inputText> 
+                        </b:column>
+                    </b:row>
+                    <br></br>
+                    <b:row>
+                        <b:column span="12">
+                            <b:commandButton icon="glyphicon-ok" action="#{mbFecha.createFecha()}" look="primary" value="Agregar" 
+                                             ajax="true"  />
+                        </b:column>
+                    </b:row>
+                    <f:facet name="footer">
+                        <b:button value="Cerrar" dismiss="modal" onclick="return false;"/>
+                    </f:facet>
+                </b:panel>
+            </h:form>
+        </b:modal>   
+        
+        <h:form id="frTabDatosComp" prependId="false">
+            <b:panel title="Datos complementarios" look="info" collapsible="false" style="height: 100%" >
+                <b:row >
+                    <b:column span="12" >
+                        <b:commandButton oncomplete="$('.modalFrmFechas').modal();return false;"
+                                         size="xs" look="primary" value="Cargar" icon="glyphicon-new-window" style="margin-top: 5px" ajax="true" />
+                    </b:column>
+                </b:row>
+            </b:panel>
+        </h:form>
+    </h:body>
+</html>
+
